@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <!-- Para que sea responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para mi Ailinsita Hermosa</title>
+  <style>
+    /****************************************************
+     *            BASE Y VARIABLES DE COLOR             *
+     ****************************************************/
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    :root {
+      --dark-color: #010113;
+      --amor-color: #ff94c2;         /* Color principal para pop-up */
+      --txt-color: #fff;
+      --transition: 0.4s ease;
+      --primary-pink: #ff94c2;       /* Color para la barra de progreso */
+      --secondary-bg: rgba(255, 255, 255, 0.2);
+      --accent-gradient: linear-gradient(
+        135deg,
+        rgba(255, 20, 147, 0.2),
+        rgba(30, 144, 255, 0.2)
+      );
+    }
+    body {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      min-height: 100vh;
+      background-color: var(--dark-color);
+      overflow: hidden;
+      perspective: 1000px;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      position: relative;
+    }
+    
+    /****************************************************
+     *                 FONDO NOCTURNO                 *
+     ****************************************************/
+    .night {
+      position: fixed;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 100%;
+      filter: blur(0.1vmin);
+      background-image: radial-gradient(
+          ellipse at top,
+          transparent 0%,
+          var(--dark-color)
+        ),
+        radial-gradient(
+          ellipse at bottom,
+          var(--dark-color),
+          rgba(145, 233, 255, 0.2)
+        ),
+        repeating-linear-gradient(
+          220deg,
+          rgb(0, 0, 0) 0px,
+          rgb(0, 0, 0) 19px,
+          transparent 19px,
+          transparent 22px
+        ),
+        repeating-linear-gradient(
+          189deg,
+          rgb(0, 0, 0) 0px,
+          rgb(0, 0, 0) 19px,
+          transparent 19px,
+          transparent 22px
+        ),
+        repeating-linear-gradient(
+          148deg,
+          rgb(0, 0, 0) 0px,
+          rgb(0, 0, 0) 19px,
+          transparent 19px,
+          transparent 22px
+        ),
+        linear-gradient(90deg, rgb(255, 94, 0), rgb(240, 240, 240));
+      z-index: 1;
+    }
+    
+    /****************************************************
+     *        FLORES / TULIPANES Y ANIMACIONES         *
+     ****************************************************/
+    .flowers {
+      position: relative;
+      transform: scale(0.9);
+      z-index: 2; /* Por encima del fondo */
+    }
+    .flower {
+      position: absolute;
+      bottom: 10vmin;
+      transform-origin: bottom center;
+      z-index: 10;
+      --fl-speed: 0.8s; /* Velocidad animación hojas */
+    }
+    /* Animaciones para balanceo */
+    .flower--1 {
+      left: 10%;
+      animation: moving-flower-1 4s linear infinite;
+    }
+    @keyframes moving-flower-1 {
+      0%, 100% { transform: rotate(2deg); }
+      50% { transform: rotate(-2deg); }
+    }
+    .flower--2 {
+      left: 50%;
+      transform: rotate(20deg);
+      animation: moving-flower-2 4s linear infinite;
+    }
+    @keyframes moving-flower-2 {
+      0%, 100% { transform: rotate(18deg); }
+      50% { transform: rotate(14deg); }
+    }
+    .flower--3 {
+      left: 80%;
+      transform: rotate(-15deg);
+      animation: moving-flower-3 4s linear infinite;
+    }
+    @keyframes moving-flower-3 {
+      0%, 100% { transform: rotate(-18deg); }
+      50% { transform: rotate(-20deg) rotateY(-10deg); }
+    }
+
+    .flower__line {
+      height: 55vmin;
+      width: 1.5vmin;
+      background-image: linear-gradient(
+          to left,
+          rgba(0, 0, 0, 0.2),
+          transparent,
+          rgba(255, 255, 255, 0.2)
+        ),
+        linear-gradient(to top, transparent 10%, #056d24, #028137);
+      box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
+      animation: grow-flower-tree 4s backwards;
+      margin: 0 auto;
+    }
+
+    @keyframes grow-flower-tree {
+      0% {
+        height: 0;
+        border-radius: 1vmin;
+      }
+    }
+
+    .flower__leafs {
+      position: relative;
+      animation: blooming-flower 2s backwards;
+    }
+
+    /* Hojas en el tallo */
+    .flower__line__leaf {
+      --w: 7vmin;
+      --h: calc(var(--w) + 2vmin);
+      position: absolute;
+      top: 20%;
+      left: 90%;
+      width: var(--w);
+      height: var(--h);
+      border-top-right-radius: var(--h);
+      border-bottom-left-radius: var(--h);
+      background-image: linear-gradient(to top, rgba(12, 94, 32, 0.4), #028137);
+    }
+    .flower__line__leaf--1 {
+      transform: rotate(70deg) rotateY(30deg);
+      animation: blooming-leaf-right var(--fl-speed) 1.6s backwards;
+    }
+    .flower__line__leaf--2 {
+      top: 45%;
+      transform: rotate(70deg) rotateY(30deg);
+      animation: blooming-leaf-right var(--fl-speed) 1.4s backwards;
+    }
+    .flower__line__leaf--3 {
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: var(--h);
+      left: -460%;
+      top: 12%;
+      transform: rotate(-70deg) rotateY(30deg);
+      animation: blooming-leaf-left var(--fl-speed) 1.2s backwards;
+    }
+    .flower__line__leaf--4 {
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: var(--h);
+      border-bottom-right-radius: var(--h);
+      left: -460%;
+      top: 40%;
+      transform: rotate(-70deg) rotateY(30deg);
+      animation: blooming-leaf-left var(--fl-speed) 1s backwards;
+    }
+    .flower__line__leaf--5 {
+      top: 0%;
+      transform: rotate(70deg) rotateY(30deg) scale(0.6);
+      transform-origin: left;
+      animation: blooming-leaf-right var(--fl-speed) 1.8s backwards;
+    }
+    .flower__line__leaf--6 {
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: var(--h);
+      border-bottom-right-radius: var(--h);
+      left: -450%;
+      top: -2%;
+      transform: rotate(-70deg) rotateY(30deg) scale(0.6);
+      transform-origin: right;
+      animation: blooming-leaf-left var(--fl-speed) 2s backwards;
+    }
+    @keyframes blooming-leaf-right {
+      0% {
+        transform-origin: left;
+        transform: rotate(70deg) rotateY(30deg) scale(0);
+      }
+    }
+    @keyframes blooming-leaf-left {
+      0% {
+        transform-origin: right;
+        transform: rotate(-70deg) rotateY(30deg) scale(0);
+      }
+    }
+    /* Pétalos de la flor */
+    .flower__leafs {
+      position: relative;
+      animation: blooming-flower 2s backwards;
+    }
+    @keyframes blooming-flower {
+      0% { transform: scale(0); }
+    }
+
+    .flower__leaf {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 8vmin;
+      height: 11vmin;
+      border-radius: 51% 49% 47% 53%/44% 45% 55% 69%;
+      background-color: #e6f331;
+      background-image: linear-gradient(to top, #e6f331, #e6f331);
+      transform-origin: bottom center;
+      opacity: 0.9;
+      box-shadow: inset 0 0 2vmin rgba(255, 255, 255, 0.5);
+    }
+    .flower__leaf--1 {
+      transform: translate(-10%, 1%) rotateY(40deg) rotateX(-50deg);
+    }
+    .flower__leaf--2 {
+      transform: translate(-50%, -4%) rotateX(40deg);
+    }
+    .flower__leaf--3 {
+      transform: translate(-90%, 0%) rotateY(45deg) rotateX(50deg);
+    }
+    .flower__leaf--4 {
+      width: 8vmin;
+      height: 8vmin;
+      transform-origin: bottom left;
+      border-radius: 4vmin 10vmin 4vmin 4vmin;
+      transform: translate(0%, 18%) rotateX(70deg) rotate(-43deg);
+      background-image: linear-gradient(to top, #e6f331, #e6f331);
+      z-index: 1;
+      opacity: 0.8;
+    }
+    .flower__white-circle {
+      position: absolute;
+      left: -3.5vmin;
+      top: -3vmin;
+      width: 9vmin;
+      height: 4vmin;
+      border-radius: 50%;
+      background-color: #fff;
+    }
+    /* Brillitos */
+    .flower__light {
+      position: absolute;
+      bottom: 0vmin;
+      width: 1vmin;
+      height: 1vmin;
+      background-color: rgb(255, 251, 0);
+      border-radius: 50%;
+      filter: blur(0.2vmin);
+      animation: light-ans 4s linear infinite backwards;
+    }
+    .flower__light:nth-child(odd) {
+      background-color: #028137;
+    }
+    @keyframes light-ans {
+      0% {
+        opacity: 0;
+        transform: translateY(0vmin);
+      }
+      25% {
+        opacity: 1;
+        transform: translateY(-5vmin) translateX(-2vmin);
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(-15vmin) translateX(2vmin);
+        filter: blur(0.2vmin);
+      }
+      75% {
+        transform: translateY(-20vmin) translateX(-2vmin);
+        filter: blur(0.2vmin);
+      }
+      100% {
+        transform: translateY(-30vmin);
+        opacity: 0;
+        filter: blur(1vmin);
+      }
+    }
+        /* Corazones flotantes optimizados */
+        .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
+    }
+    .floating-heart {
+      position: absolute;
+      width: 4vmin;
+      height: 4vmin;
+      fill: #ff69b4;
+      opacity: 0;
+      animation: heartFloat 6s ease-in-out infinite;
+    }
+    @keyframes heartFloat {
+      0%, 100% { transform: translateY(0) scale(0.5); opacity: 0; }
+      25% { opacity: 0.8; }
+      100% { transform: translateY(-110vh) scale(1) rotate(360deg); opacity: 0; }
+    }
+    
+    /****************************************************
+     *         BURBUJAS / CORAZONES FLOTANTES          *
+     ****************************************************/
+     .bubbles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .bubble {
+      position: absolute;
+      z-index: 200;
+      border-radius: 50%;
+      animation: love-burst 3s infinite;
+    }
+    @keyframes love-burst {
+      50%, 100% { box-shadow: inset 0 0 0 0 rgb(18, 226, 129); transform: scale(1); }
+    }
+    @keyframes love {
+      50% {
+        fill: rgb(253, 93, 19);
+        opacity: 1;
+      }
+    }
+    /* Ejemplo de burbuja (puedes duplicar estos bloques o ajustarlos) */
+    .bubble:nth-child(1) {
+      top: 80%;
+      left: 10%;
+      height: 8vmin;
+      width: 8vmin;
+      animation: love-burst 3s infinite 0s;
+      box-shadow: inset 0 0 0 4vmin transparent;
+      transform: translate(0, 0.2em) scale(0);
+      transform-origin: center bottom;
+    }
+    .bubble:nth-child(1) .heart {
+      animation: love 3s forwards infinite 0s;
+      transform: scale(0.5) rotate(-4deg);
+    }
+    
+    /****************************************************
+     *         NUEVOS CORAZONES FLOTANTES             *
+     ****************************************************/
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3; /* Encima de las flores */
+    }
+    .floating-heart {
+      position: absolute;
+      width: 4vmin;
+      height: 4vmin;
+      fill: #ff69b4;
+      opacity: 0;
+      animation: heartFloat 6s ease-in-out infinite;
+    }
+    @keyframes heartFloat {
+      0% {
+        transform: translateY(0) scale(0.5) rotate(0deg);
+        opacity: 0;
+      }
+      25% { opacity: 0.8; }
+      100% {
+        transform: translateY(-110vh) scale(1) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    
+    /****************************************************
+     *              POP-UP “CARTA DE AMOR”             *
+     ****************************************************/
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition);
+    }
+    .overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .popup {
+      background: #fffdfa;
+      color: #333;
+      padding: 2rem 2.5rem;
+      border-radius: 10px;
+      max-width: 80%;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+      animation: popup-card 0.8s forwards;
+      transform-origin: center center;
+    }
+    @keyframes popup-card {
+      0% { transform: scale(0.3) rotateX(60deg); opacity: 0; }
+      50% { transform: scale(0.5) rotateX(20deg); opacity: 0.7; }
+      100% { transform: scale(1) rotateX(0); opacity: 1; }
+    }
+    .popup h1 {
+      font-family: "Brush Script MT", cursive, sans-serif;
+      font-size: 2rem;
+      color: #d30559;
+      margin-bottom: 1rem;
+    }
+    .popup p {
+      font-size: 1.1rem;
+      line-height: 1.4;
+      margin-bottom: 1rem;
+    }
+    .popup p span {
+      font-weight: bold;
+      color: #ff4382;
+    }
+    .signature {
+      margin-top: 1.5rem;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: #555;
+    }
+    .close-btn {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: transparent;
+      border: none;
+      color: #c0392b;
+      font-size: 1.8rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: transform 0.2s ease;
+    }
+    .close-btn:hover {
+      transform: scale(1.2);
+    }
+    
+    /****************************************************
+     *       REPRODUCTOR PERSONALIZADO (AUTOPLAY)       *
+     ****************************************************/
+    .custom-player-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 9998;
+      background: var(--secondary-bg);
+      backdrop-filter: blur(6px);
+      border-top-right-radius: 15px;
+      box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.5);
+      padding: 1rem 1.5rem;
+      display: flex;
+      flex-direction: column; 
+      gap: 0.5rem;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    .custom-player-container:hover {
+      transform: translateY(-5px);
+      background: var(--accent-gradient);
+    }
+    .player-top {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .playPauseBtn {
+      background: var(--primary-pink);
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      padding: 0.4rem 0.8rem;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+      transition: background 0.3s ease;
+    }
+    .playPauseBtn:hover {
+      background: #ff66a6;
+    }
+    .time-display {
+      color: #fff;
+      font-size: 0.9rem;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      min-width: 60px;
+      text-align: center;
+    }
+    .progress-container {
+      width: 300px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      border-radius: 5px;
+      position: relative;
+      overflow: hidden;
+    }
+    .progress {
+      background: var(--primary-pink);
+      height: 100%;
+      width: 0%;
+      border-radius: 5px;
+      transition: width 0.1s linear;
+    }
+    .progress::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+      opacity: 0.8;
+    }
+    /* Ocultar el audio nativo */
+    #myAudio { display: none; }
+    
+    /****************************************************
+     *                  MEDIA QUERIES                  *
+     ****************************************************/
+    /* Media Queries para hacer las flores más grandes en pantallas pequeñas */
+    @media (max-width: 768px) {
+      .flowers {
+        transform: scale(1.2); /* Aumentar tamaño de las flores */
+      }
+      .flower__leaf {
+        width: 12vmin; /* Ajustar el tamaño de los pétalos */
+        height: 15vmin;
+      }
+      .flower__line {
+        height: 70vmin; /* Aumentar el tamaño del tallo */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .flowers {
+        transform: scale(1.5); /* Aumentar aún más el tamaño en pantallas más pequeñas */
+      }
+      .flower__leaf {
+        width: 14vmin;
+        height: 17vmin;
+      }
+      .flower__line {
+        height: 80vmin; /* Aumentar el tallo aún más */
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Fondo nocturno -->
+  <div class="night"></div>
+
+  <!-- CONTENEDOR DE FLORES (ejemplo de 3 flores) -->
+  <div class="flowers">
+    <!-- Flower 1 -->
+    <div class="flower flower--1">
+      <div class="flower__leafs">
+        <div class="flower__leaf flower__leaf--1"></div>
+        <div class="flower__leaf flower__leaf--2"></div>
+        <div class="flower__leaf flower__leaf--3"></div>
+        <div class="flower__leaf flower__leaf--4"></div>
+        <div class="flower__white-circle"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+      </div>
+      <div class="flower__line">
+        <div class="flower__line__leaf flower__line__leaf--1"></div>
+        <div class="flower__line__leaf flower__line__leaf--2"></div>
+        <div class="flower__line__leaf flower__line__leaf--3"></div>
+        <div class="flower__line__leaf flower__line__leaf--4"></div>
+        <div class="flower__line__leaf flower__line__leaf--5"></div>
+        <div class="flower__line__leaf flower__line__leaf--6"></div>
+      </div>
+    </div>
+    <!-- Flower 2 -->
+    <div class="flower flower--2">
+      <div class="flower__leafs">
+        <div class="flower__leaf flower__leaf--1"></div>
+        <div class="flower__leaf flower__leaf--2"></div>
+        <div class="flower__leaf flower__leaf--3"></div>
+        <div class="flower__leaf flower__leaf--4"></div>
+        <div class="flower__white-circle"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+      </div>
+      <div class="flower__line">
+        <div class="flower__line__leaf flower__line__leaf--1"></div>
+        <div class="flower__line__leaf flower__line__leaf--2"></div>
+        <div class="flower__line__leaf flower__line__leaf--3"></div>
+        <div class="flower__line__leaf flower__line__leaf--4"></div>
+      </div>
+    </div>
+    <!-- Flower 3 -->
+    <div class="flower flower--3">
+      <div class="flower__leafs">
+        <div class="flower__leaf flower__leaf--1"></div>
+        <div class="flower__leaf flower__leaf--2"></div>
+        <div class="flower__leaf flower__leaf--3"></div>
+        <div class="flower__leaf flower__leaf--4"></div>
+        <div class="flower__white-circle"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+      </div>
+      <div class="flower__line">
+        <div class="flower__line__leaf flower__line__leaf--1"></div>
+        <div class="flower__line__leaf flower__line__leaf--2"></div>
+        <div class="flower__line__leaf flower__line__leaf--3"></div>
+        <div class="flower__line__leaf flower__line__leaf--4"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Burbujas con corazón (ejemplo, puedes duplicar según desees) -->
+  <div class="bubbles">
+    <div class="bubble">
+      <svg class="heart" viewBox="0 0 32 32">
+        <title>heart</title>
+        <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594
+                 -1.342-2.858-4.237-5.594-7.601-5.594
+                 -4.637 0-8.4 3.764-8.4 8.401
+                 0 9.433 9.516 11.906 16.001 21.232
+                 6.13-9.268 15.999-12.1 15.999-21.232
+                 0-4.637-3.763-8.401-8.4-8.401z">
+        </path>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Floating Hearts across the screen -->
+  <div class="floating-hearts">
+    <svg class="floating-heart" style="left: 5%;" viewBox="0 0 32 32"><path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path></svg>
+      <title>floating-heart</title>
+      <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594
+               -1.342-2.858-4.237-5.594-7.601-5.594
+               -4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232
+               6.13-9.268 15.999-12.1 15.999-21.232
+               0-4.637-3.763-8.401-8.4-8.401z">
+      </path>
+    </svg>
+    <svg class="floating-heart" style="left: 5%;" viewBox="0 0 32 32"><path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path></svg>
+      <title>floating-heart</title>
+      <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594
+               -1.342-2.858-4.237-5.594-7.601-5.594
+               -4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232
+               6.13-9.268 15.999-12.1 15.999-21.232
+               0-4.637-3.763-8.401-8.4-8.401z">
+      </path>
+    </svg>
+    <svg class="floating-heart" style="left: 5%;" viewBox="0 0 32 32"><path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path></svg>
+      <title>floating-heart</title>
+      <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594
+               -1.342-2.858-4.237-5.594-7.601-5.594
+               -4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232
+               6.13-9.268 15.999-12.1 15.999-21.232
+               0-4.637-3.763-8.401-8.4-8.401z">
+      </path>
+    </svg>
+    <svg class="floating-heart" style="left: 5%;" viewBox="0 0 32 32"><path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path></svg>
+      <title>floating-heart</title>
+      <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594
+               -1.342-2.858-4.237-5.594-7.601-5.594
+               -4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232
+               6.13-9.268 15.999-12.1 15.999-21.232
+               0-4.637-3.763-8.401-8.4-8.401z">
+      </path>
+    </svg>
+    <svg class="floating-heart" style="left: 5%;" viewBox="0 0 32 32"><path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path></svg>
+      <title>floating-heart</title>
+      <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594
+               -1.342-2.858-4.237-5.594-7.601-5.594
+               -4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232
+               6.13-9.268 15.999-12.1 15.999-21.232
+               0-4.637-3.763-8.401-8.4-8.401z">
+      </path>
+    </svg>
+    <svg class="floating-heart" style="left: 5%;" viewBox="0 0 32 32"><path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path></svg>
+      <title>floating-heart</title>
+      <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594
+               -1.342-2.858-4.237-5.594-7.601-5.594
+               -4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232
+               6.13-9.268 15.999-12.1 15.999-21.232
+               0-4.637-3.763-8.401-8.4-8.401z">
+      </path>
+    </svg>
+    <svg class="floating-heart" style="left: 5%;" viewBox="0 0 32 32"><path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path></svg>
+      <title>floating-heart</title>
+      <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594
+               -1.342-2.858-4.237-5.594-7.601-5.594
+               -4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232
+               6.13-9.268 15.999-12.1 15.999-21.232
+               0-4.637-3.763-8.401-8.4-8.401z">
+      </path>
+    </svg>
+    <svg class="floating-heart" style="left: 5%;" viewBox="0 0 32 32"><path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path></svg>
+      <title>floating-heart</title>
+      <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594
+               -1.342-2.858-4.237-5.594-7.601-5.594
+               -4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232
+               6.13-9.268 15.999-12.1 15.999-21.232
+               0-4.637-3.763-8.401-8.4-8.401z">
+      </path>
+    </svg>
+    <svg class="floating-heart" style="left: 5%;" viewBox="0 0 32 32"><path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path></svg>
+      <title>floating-heart</title>
+      <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594
+               -1.342-2.858-4.237-5.594-7.601-5.594
+               -4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232
+               6.13-9.268 15.999-12.1 15.999-21.232
+               0-4.637-3.763-8.401-8.4-8.401z">
+      </path>
+    </svg>
+    <svg class="floating-heart" style="left: 5%;" viewBox="0 0 32 32"><path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path></svg>
+      <title>floating-heart</title>
+      <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594
+               -1.342-2.858-4.237-5.594-7.601-5.594
+               -4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232
+               6.13-9.268 15.999-12.1 15.999-21.232
+               0-4.637-3.763-8.401-8.4-8.401z">
+      </path>
+    </svg>
+  </div>
+    <!-- POP-UP “CARTA DE AMOR” -->
+    <div id="overlay" class="overlay">
+        <div class="popup">
+          <button class="close-btn" id="closeBtn">&times;</button>
+          <h1>Mi bella güerita</h1>
+          <p>
+            Ailinsita <span>Hermosa</span>:<br>
+            Cada vez que miro tus ojos, siento que todo lo demás desaparece.<br>
+            Es como si esos ojos tuvieran el poder de iluminar mi mundo, como estrellas en la oscuridad.<br>
+            En esta página, cada flor y cada nota musical<br>
+            late con <span>todo mi amor</span> para ti.
+          </p>
+          <p>
+            Tu mirada tiene una dulzura que me atrapa, y no hay nada que desee más que perderme en ella.<br>
+            Me haces sentir vivo, me haces soñar, y es imposible no querer estar cerca de ti en cada momento.<br>
+            Eres mi musa, mi sol, y mi inspiración; tus ojos son el reflejo de todo lo hermoso que eres.<br>
+            Espero con ansias el día en que pueda verte nuevamente y sentirte cerca de mí.<br>
+            Durante estos días te pondré una canción diferente que me recuerda a ti.<br>
+            Cada vez que entres imagina que te la estoy dedicando <span>ojitos bonitos.</span><br>
+          </p>
+          <div class="signature">
+            Con todo mi Amor güerita bella, <span>Imanol</span>
+          </div>
+        </div>
+      </div>
+    
+      <!-- AUDIO OCULTO (AUTOPLAY) -->
+      <audio id="myAudio"></audio>
+    
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          // 1) Mostrar la "carta" (pop-up)
+          const overlay = document.getElementById("overlay");
+          overlay.classList.add("active");
+    
+          // 2) Botón para cerrar la carta
+          const closeBtn = document.getElementById("closeBtn");
+          closeBtn.addEventListener("click", () => {
+            overlay.classList.remove("active");
+          });
+    
+          // 3) Selección de música según el día
+          const songs = [
+            "Musica/Porfa no te vayas.mp3",
+            "Musica/Los Ángeles Azules, Santa Fe Klan, Cazzu - Tú y Tú.mp3",
+            "Musica/Until I Found You.mp3",
+            "Musica/00_00.mp3",
+            "Musica/Morat - A Dónde Vamos.mp3",
+            "Musica/Perfect.mp3",
+            "Musica/Siddhartha - Me Hace Falta (Cap. 2) (Cap. 2).mp3",
+            "Musica/Siddhartha - Paraíso Luna.mp3",
+            "Musica/Morat - Aprender A Quererte.mp3",
+            "Musica/Siddhartha - Náufrago.mp3",
+            "Musica/Ser Parte.mp3",
+            "Musica/BIRDS OF A FEATHER.mp3",
+          ];
+          const day = new Date().getDate(); // 1..31
+          const index = (day - 1) % songs.length;
+          const audioElem = document.getElementById("myAudio");
+          audioElem.src = songs[index];
+    
+          // 4) Reproducir el audio cuando el usuario haga clic en cualquier parte de la página
+          document.body.addEventListener("click", function() {
+            audioElem.play().catch(err => {
+              console.warn("Autoplay bloqueado por el navegador:", err);
+            });
+          });
+    
+          // 5) Iniciar el reproductor personalizado
+          initCustomPlayer();
+        });
+    
+        function initCustomPlayer() {
+          const audio = document.getElementById("myAudio");
+          const playPauseBtn = document.getElementById("playPauseBtn");
+          const progressContainer = document.getElementById("progressContainer");
+          const progress = document.getElementById("progress");
+          const currentTimeDisplay = document.getElementById("currentTime");
+          const totalTimeDisplay = document.getElementById("totalTime");
+    
+          playPauseBtn.addEventListener("click", () => {
+            if (audio.paused) {
+              audio.play();
+              playPauseBtn.textContent = "Pause";
+            } else {
+              audio.pause();
+              playPauseBtn.textContent = "Play";
+            }
+          });
+    
+          audio.addEventListener("loadedmetadata", () => {
+            totalTimeDisplay.textContent = formatTime(audio.duration);
+          });
+    
+          audio.addEventListener("timeupdate", () => {
+            const percent = (audio.currentTime / audio.duration) * 100;
+            progress.style.width = percent + "%";
+            currentTimeDisplay.textContent = formatTime(audio.currentTime);
+          });
+    
+          progressContainer.addEventListener("click", (e) => {
+            const rect = progressContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const totalWidth = rect.width;
+            const newTime = (x / totalWidth) * audio.duration;
+            audio.currentTime = newTime;
+          });
+    
+          audio.addEventListener("ended", () => {
+            playPauseBtn.textContent = "Play";
+          });
+        }
+    
+        function formatTime(seconds) {
+          if (isNaN(seconds)) return "0:00";
+          const m = Math.floor(seconds / 60);
+          const s = Math.floor(seconds % 60);
+          return m + ":" + (s < 10 ? "0" + s : s);
+        }
+      </script>
+    </body>
+    </html>

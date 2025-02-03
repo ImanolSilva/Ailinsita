@@ -385,23 +385,24 @@
     /****************************************************
      *         NUEVOS CORAZONES FLOTANTES             *
      ****************************************************/
-    .floating-hearts {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 3; /* Encima de las flores */
-    }
-    .floating-heart {
-      position: absolute;
-      width: 4vmin;
-      height: 4vmin;
-      fill: #ff69b4;
-      opacity: 0;
-      animation: heartFloat 6s ease-in-out infinite;
-    }
+     .floating-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Para que no interfieran con otros elementos */
+    z-index: 3; /* Asegúrate de que estén por encima de otros elementos */
+}
+
+.floating-heart {
+    position: absolute;
+    width: 4vmin;
+    height: 4vmin;
+    fill: #ff69b4; /* Color de los corazones */
+    opacity: 0;
+    animation: heartFloat 6s ease-in-out infinite;
+}
     @keyframes heartFloat {
       0% {
         transform: translateY(0) scale(0.5) rotate(0deg);
@@ -598,6 +599,7 @@
       .popup p {
         font-size: 0.9rem;
       }
+      
     }
   </style>
 </head>
@@ -681,6 +683,99 @@
         <div class="flower__line__leaf flower__line__leaf--4"></div>
       </div>
     </div>
+    <div class="flower flower--4">
+      <div class="flower__leafs">
+          <div class="flower__leaf flower__leaf--1"></div>
+          <div class="flower__leaf flower__leaf--2"></div>
+          <div class="flower__leaf flower__leaf--3"></div>
+          <div class="flower__leaf flower__leaf--4"></div>
+          <div class="flower__white-circle"></div>
+          <div class="flower__light"></div>
+          <div class="flower__light"></div>
+      </div>
+      <div class="flower__line">
+          <div class="flower__line__leaf flower__line__leaf--1"></div>
+          <div class="flower__line__leaf flower__line__leaf--2"></div>
+      </div>
+  </div>
+
+  <div class="flower flower--5">
+      <div class="flower__leafs">
+          <div class="flower__leaf flower__leaf--1"></div>
+          <div class="flower__leaf flower__leaf--2"></div>
+          <div class="flower__leaf flower__leaf--3"></div>
+          <div class="flower__leaf flower__leaf--4"></div>
+          <div class="flower__white-circle"></div>
+          <div class="flower__light"></div>
+          <div class="flower__light"></div>
+      </div>
+      <div class="flower__line">
+          <div class="flower__line__leaf flower__line__leaf--1"></div>
+          <div class="flower__line__leaf flower__line__leaf--2"></div>
+      </div>
+  </div>
+  <div class="flower flower--4">
+    <div class="flower__leafs">
+        <div class="flower__leaf flower__leaf--1"></div>
+        <div class="flower__leaf flower__leaf--2"></div>
+        <div class="flower__leaf flower__leaf--3"></div>
+        <div class="flower__leaf flower__leaf--4"></div>
+        <div class="flower__white-circle"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+    </div>
+    <div class="flower__line">
+        <div class="flower__line__leaf flower__line__leaf--1"></div>
+        <div class="flower__line__leaf flower__line__leaf--2"></div>
+    </div>
+</div>
+
+<div class="flower flower--5">
+    <div class="flower__leafs">
+        <div class="flower__leaf flower__leaf--1"></div>
+        <div class="flower__leaf flower__leaf--2"></div>
+        <div class="flower__leaf flower__leaf--3"></div>
+        <div class="flower__leaf flower__leaf--4"></div>
+        <div class="flower__white-circle"></div>
+        <div class="flower__light"></div>
+        <div class="flower__light"></div>
+    </div>
+    <div class="flower__line">
+        <div class="flower__line__leaf flower__line__leaf--1"></div>
+        <div class="flower__line__leaf flower__line__leaf--2"></div>
+    </div>
+</div>
+<div class="flower flower--4">
+  <div class="flower__leafs">
+      <div class="flower__leaf flower__leaf--1"></div>
+      <div class="flower__leaf flower__leaf--2"></div>
+      <div class="flower__leaf flower__leaf--3"></div>
+      <div class="flower__leaf flower__leaf--4"></div>
+      <div class="flower__white-circle"></div>
+      <div class="flower__light"></div>
+      <div class="flower__light"></div>
+  </div>
+  <div class="flower__line">
+      <div class="flower__line__leaf flower__line__leaf--1"></div>
+      <div class="flower__line__leaf flower__line__leaf--2"></div>
+  </div>
+</div>
+
+<div class="flower flower--5">
+  <div class="flower__leafs">
+      <div class="flower__leaf flower__leaf--1"></div>
+      <div class="flower__leaf flower__leaf--2"></div>
+      <div class="flower__leaf flower__leaf--3"></div>
+      <div class="flower__leaf flower__leaf--4"></div>
+      <div class="flower__white-circle"></div>
+      <div class="flower__light"></div>
+      <div class="flower__light"></div>
+  </div>
+  <div class="flower__line">
+      <div class="flower__line__leaf flower__line__leaf--1"></div>
+      <div class="flower__line__leaf flower__line__leaf--2"></div>
+  </div>
+</div>
   </div>
 
   <!-- Burbujas con corazón (ejemplo, puedes duplicar según desees) -->
@@ -696,6 +791,7 @@
                  0-4.637-3.763-8.401-8.4-8.401z">
         </path>
       </svg>
+
     </div>
   </div>
 
@@ -791,6 +887,33 @@
                0-4.637-3.763-8.401-8.4-8.401z">
       </path>
     </svg>
+    <div class="floating-hearts">
+      <svg class="floating-heart" style="left: 5%;" viewBox="0 0 32 32">
+          <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+      </svg>
+  
+      <svg class="floating-heart" style="left: 20%;" viewBox="0 0 32 32">
+          <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+      </svg>
+      </div>
+      <div class="floating-hearts">
+        <svg class="floating-heart" style="left: 5%;" viewBox="0 0 32 32">
+            <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+        </svg>
+    
+        <svg class="floating-heart" style="left: 20%;" viewBox="0 0 32 32">
+            <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+        </svg>
+        </div>
+        <div class="floating-hearts">
+          <svg class="floating-heart" style="left: 5%;" viewBox="0 0 32 32">
+              <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+          </svg>
+      
+          <svg class="floating-heart" style="left: 20%;" viewBox="0 0 32 32">
+              <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+          </svg>
+          </div>
   </div>
 <!-- POP-UP “CARTA DE AMOR” -->
 <div id="overlay" class="overlay">
@@ -818,6 +941,42 @@
       <audio id="myAudio"></audio>
     
       <script>
+               
+        // Agregar más ramas a las flores
+        const flowers = document.querySelectorAll('.flower');
+
+        flowers.forEach(flower => {
+            const numBranches = 3; // Cantidad de ramas por flor
+
+            for (let i = 0; i < numBranches; i++) {
+                const branch = document.createElement('div');
+                branch.classList.add('flower__line__leaf');
+                branch.style.width = `${Math.random() * 2 + 1}vmin`; // Ancho aleatorio
+                branch.style.height = `${Math.random() * 10 + 5}vmin`; // Alto aleatorio
+                branch.style.transform = `rotate(${Math.random() * 360}deg)`; // Rotación aleatoria
+                flower.querySelector('.flower__line').appendChild(branch);
+            }
+        });
+        const floatingHeartsContainer = document.querySelector('.floating-hearts');
+const numHearts = 20; // Cantidad de corazones
+
+for (let i = 0; i < numHearts; i++) {
+    const heart = document.createElement('div');
+    heart.classList.add('floating-heart');
+
+    // Posición aleatoria en la pantalla
+    heart.style.left = `${Math.random() * 100}%`;
+    heart.style.top = `${Math.random() * 100}%`;
+
+    // SVG del corazón (puedes usar el mismo que tenías antes)
+    heart.innerHTML = `
+        <svg viewBox="0 0 32 32">
+            <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+        </svg>
+    `;
+
+    floatingHeartsContainer.appendChild(heart);
+}
         document.addEventListener("DOMContentLoaded", function() {
           // 1) Mostrar la "carta" (pop-up)
           const overlay = document.getElementById("overlay");
@@ -908,6 +1067,7 @@
           const s = Math.floor(seconds % 60);
           return m + ":" + (s < 10 ? "0" + s : s);
         }
+        
       </script>
     </body>
     </html>

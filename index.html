@@ -575,28 +575,28 @@
      ****************************************************/
     /* Media Queries para hacer las flores más grandes en pantallas pequeñas */
     @media (max-width: 768px) {
-      .flowers {
-        transform: scale(1.2); /* Aumentar tamaño de las flores */
+      .popup {
+        width: 80%; /* Ajusta el tamaño en pantallas medianas */
+        padding: 1.5rem;
       }
-      .flower__leaf {
-        width: 12vmin; /* Ajustar el tamaño de los pétalos */
-        height: 15vmin;
+      .popup h1 {
+        font-size: 1.5rem;
       }
-      .flower__line {
-        height: 70vmin; /* Aumentar el tamaño del tallo */
+      .popup p {
+        font-size: 1rem;
       }
     }
 
     @media (max-width: 480px) {
-      .flowers {
-        transform: scale(1.5); /* Aumentar aún más el tamaño en pantallas más pequeñas */
+      .popup {
+        width: 90%;
+        padding: 1rem;
       }
-      .flower__leaf {
-        width: 14vmin;
-        height: 17vmin;
+      .popup h1 {
+        font-size: 1.2rem;
       }
-      .flower__line {
-        height: 80vmin; /* Aumentar el tallo aún más */
+      .popup p {
+        font-size: 0.9rem;
       }
     }
   </style>
